@@ -1,0 +1,10 @@
+title: MangaRoll · 漫画时光卷
+description: 法律文档 · Legal Documents
+theme: jekyll-theme-cayman
+permalink: /:basename/
+markdown: kramdown
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
