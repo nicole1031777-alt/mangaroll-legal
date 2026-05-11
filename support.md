@@ -13,7 +13,7 @@ If you have any questions, suggestions, or wish to report content, please reach 
 
 ## 📧 联系方式 · Contact
 
-- **电子邮件 · Email**: [zooms@annauniv.edu](mailto:zooms@annauniv.edu)
+- **电子邮件 · Email**: [453112078@qq.com](mailto:453112078@qq.com)
 - **响应时间 · Response time**: 工作日 4 小时内回复 / Within 4 hours on business days (UTC+8, 09:00-18:00)
 
 ---
