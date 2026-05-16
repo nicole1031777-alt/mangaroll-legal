@@ -6,7 +6,7 @@ permalink: /privacy/
 # MangaRoll · 漫画时光卷 隐私政策
 
 **生效日期: 2026 年 5 月 6 日**
-**最近更新: 2026 年 5 月 6 日**
+**最近更新: 2026 年 5 月 16 日**
 
 我们尊重并致力于保护使用 MangaRoll · 漫画时光卷(以下简称"本应用")的所有用户的个人信息及隐私权。本隐私政策将帮助你了解我们收集哪些信息、如何使用这些信息、以及你享有的权利。在使用本应用前,请仔细阅读并理解本政策。
 
@@ -71,13 +71,36 @@ permalink: /privacy/
 
 ### 3.1 必要的第三方服务提供商
 
-| 第三方 | 数据类型 | 用途 |
-|---|---|---|
-| **Apple Inc.** | Apple ID 匿名标识符、IAP 订单 | 登录、内购、推送通知 |
-| **腾讯云 Tencent CloudBase** | 全部用户数据 | 后端数据库与文件存储(数据中心位于中国大陆) |
-| **腾讯云内容安全** | 上传图片、用户文本 | 文本与图片合规审核(色情、政治敏感、暴力等) |
-| **Google LLC(Gemini API,经代理)** | 你上传的照片 | 生成漫画图像。照片仅用于本次生成,不被 Google 用于训练 |
-| **微信开放平台** | openid / unionid | 微信登录与跨平台账号关联 |
+| 第三方 | 数据类型 | 用途 | 留存期 |
+|---|---|---|---|
+| **Apple Inc.**(美国) | Apple ID 匿名标识符 (`sub`)、IAP 订单元数据 | iOS 登录、内购校验、推送通知 | 由 Apple 隐私政策约束 |
+| **腾讯云 CloudBase**(中国大陆,上海/广州区域) | 全部业务数据(用户、作品、订单、聊天) | 后端数据库与文件存储 | 至账号注销后 30 天 |
+| **腾讯云内容安全**(中国大陆) | 上传图片、用户提交的文本 | 自动审核色情、暴力、政治敏感等违规内容 | 审核日志保留 6 个月 |
+| **Google LLC — Gemini API**(美国,经代理 Poixe / API易) | 你上传的照片(临时传输) | 分析照片内容用于叙事结构(故事类型、主图判断、情绪标签) | **不留存,本次请求结束即丢弃**;Google 承诺 Gemini API 数据不用于训练模型 |
+| **字节跳动 — 即梦 (Seedream)**(中国大陆) | 你上传的照片(临时传输) + 文本提示词 | 生成漫画图像 | **不留存,本次请求结束即丢弃**;字节跳动承诺 API 输入不用于训练模型 |
+| **字节跳动 — 豆包 (Doubao)**(中国大陆) | 文本提示词(派生自照片分析结果,**不**包含照片) | 生成漫画配文 | **不留存,本次请求结束即丢弃** |
+| **腾讯混元 (Hunyuan)**(中国大陆) | 文本提示词 | 部分场景下的文案与审核辅助 | **不留存,本次请求结束即丢弃** |
+| **微信开放平台**(中国大陆) | openid / unionid | 微信登录与跨平台账号关联(仅当你选择微信登录时) | 由微信隐私政策约束 |
+
+### 3.1.1 我们对上述第三方的合规要求
+
+我们已与上述每一家第三方签署或确认以下事项,确保它们提供**不低于本政策的保护水平**:
+
+1. **数据最小化**:每次请求只发送当次生成所必需的最少数据(选中的 1-9 张照片 + 派生的文字提示)
+2. **传输加密**:所有出站请求均通过 HTTPS / TLS 1.2+
+3. **不用于训练**:Google Gemini API、字节跳动开放平台、腾讯云均在其官方 API 服务条款中承诺 API 输入不用于其大模型训练
+4. **不二次分享**:第三方收到的数据不会被转售给广告商、数据经纪商或其他用途
+5. **审计与撤回**:你可随时通过 App「设置 → AI 服务发送同意」关闭后续生成调用,或通过本文末邮箱要求我们提供数据访问/删除报告
+
+### 3.1.2 关于"AI 是否会处理人脸"
+
+我们的 App **不**做任何"人脸识别 / 人脸特征提取 / 人脸库构建":
+- 我们**不使用** Apple Vision、CIDetector 等任何本地人脸识别 API
+- 我们**不使用** Apple FaceID 或任何生物特征识别
+- 我们**不会**将照片中的人脸数据存入数据库,**不会**为任何人建立人脸索引
+- 上述第三方 AI 服务**仅**将照片作为整体视觉输入用于图像风格化生成,生成完成后立即丢弃,**不**保留人脸特征向量
+
+如果你上传的照片中包含人脸(本人或他人),它将与照片中其他视觉元素(背景、物体、构图)一并被风格化为漫画。我们**强烈建议**在上传他人照片前征得其同意。
 
 ### 3.2 法律与安全
 
@@ -159,8 +182,9 @@ permalink: /privacy/
 
 主要存储位于**中国大陆**(腾讯云上海/广州区域)。出于以下目的,部分数据会被传输至中国大陆境外:
 
-- AI 漫画生成: 你上传的照片会经由我方服务器转发至 Google Gemini API(美国)。Google 根据其[隐私政策](https://policies.google.com/privacy)处理该数据,**不会**将其用于训练 AI 模型。
-- iOS 推送通知: 通过 Apple Push Notification Service(美国)。
+- **照片内容分析**: 你上传的照片会经由我方服务器转发至 **Google Gemini API**(美国)。Google 根据其[隐私政策](https://policies.google.com/privacy)处理该数据,**不会**将其用于训练 AI 模型。
+- **漫画图像与文案生成**: 派生的文字提示与(部分情形下)照片会发送至**字节跳动 即梦 / 豆包**与**腾讯混元**(中国大陆境内 — 不构成跨境传输,但我们在此一并披露以保持透明)。
+- **iOS 推送通知**: 通过 **Apple Push Notification Service**(美国)。
 
 我们会在合理范围内确保该等跨境传输符合所适用的数据保护法律。
 
@@ -198,7 +222,9 @@ This is a brief English summary. The Chinese version above is authoritative.
 
 **What we do NOT collect:** precise location, contacts, microphone, IDFA, browsing history.
 
-**Who we share with:** Apple (login + IAP), Tencent CloudBase (backend), Tencent Cloud Content Moderation (compliance), Google Gemini (AI generation, photos NOT used for model training), WeChat Open Platform (login on WeChat side only).
+**Who we share with:** Apple (login + IAP, USA), Tencent CloudBase (backend, China), Tencent Cloud Content Moderation (compliance, China), Google Gemini (photo content analysis, USA — photos NOT used for training), ByteDance Seedream + Doubao (image/text generation, China — inputs NOT used for training), Tencent Hunyuan (auxiliary text generation, China), WeChat Open Platform (WeChat login only).
+
+**Face data:** This app does NOT perform face detection, face recognition, or face feature extraction. We do NOT use Apple Vision, CIDetector, FaceID, or any other biometric API. Photos may contain faces (yours or others') but those faces are processed by the AI services only as part of the overall image for stylization, not for biometric identification. No face database is built. No face features are stored.
 
 **Retention:** uploaded photos auto-deleted after 30 days; account data until you delete; order records ≥ 3 years (China e-commerce law); moderation logs ≥ 6 months (China Cybersecurity Law).
 
